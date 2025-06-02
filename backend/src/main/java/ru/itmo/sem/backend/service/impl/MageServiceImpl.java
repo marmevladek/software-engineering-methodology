@@ -2,11 +2,16 @@ package ru.itmo.sem.backend.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.itmo.sem.backend.exception.RoleNotFoundException;
+import ru.itmo.sem.backend.mapper.MagicOrderMapper;
 import ru.itmo.sem.backend.mapper.UserMapper;
+import ru.itmo.sem.backend.model.MagicOrder;
 import ru.itmo.sem.backend.model.Role;
 import ru.itmo.sem.backend.model.User;
+import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
+import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
 import ru.itmo.sem.backend.payload.response.UserResponse;
+import ru.itmo.sem.backend.repository.MagicOrderRepository;
 import ru.itmo.sem.backend.repository.RoleRepository;
 import ru.itmo.sem.backend.repository.UserRepository;
 import ru.itmo.sem.backend.service.MageService;
@@ -16,15 +21,16 @@ public class MageServiceImpl implements MageService {
 
     private final UserRepository userRepository;
     private final RoleRepository roleRepository;
+    private final MagicOrderRepository magicOrderRepository;
 
-    public MageServiceImpl(UserRepository userRepository, RoleRepository roleRepository) {
+    public MageServiceImpl(UserRepository userRepository, RoleRepository roleRepository, MagicOrderRepository magicOrderRepository) {
         this.userRepository = userRepository;
         this.roleRepository = roleRepository;
+        this.magicOrderRepository = magicOrderRepository;
     }
 
     @Override
     public UserResponse createUser(UserRequest userRequest) {
-
         Role role = roleRepository.findById(userRequest.getRole())
                 .orElseThrow(() -> new RoleNotFoundException(userRequest.getRole()));
 
@@ -32,5 +38,13 @@ public class MageServiceImpl implements MageService {
         User savedUser = userRepository.save(user);
 
         return UserMapper.toResponse(savedUser);
+    }
+
+    @Override
+    public MagicOrderResponse createMagicOrder(MagicOrderRequest magicOrderRequest) {
+        MagicOrder order = MagicOrderMapper.toEntity(magicOrderRequest);
+        MagicOrder savedOrder = magicOrderRepository.save(order);
+
+        return MagicOrderMapper.toResponse(savedOrder);
     }
 }

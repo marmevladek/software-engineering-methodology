@@ -1,5 +1,6 @@
 package ru.itmo.sem.backend.controller;
 
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -7,8 +8,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itmo.sem.backend.payload.request.OrderRequest;
+import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
+import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
+import ru.itmo.sem.backend.payload.response.UserResponse;
 import ru.itmo.sem.backend.service.MageService;
 
 @RestController
@@ -18,15 +21,14 @@ public class MageController {
 
     private final MageService mageService;
 
-
-    @PostMapping("/create")
-    public ResponseEntity<?> createUser(@RequestBody UserRequest userRequest) {
+    @PostMapping("/user/create")
+    public ResponseEntity<UserResponse> createUser(@Valid @RequestBody UserRequest userRequest) {
         return new ResponseEntity<>(mageService.createUser(userRequest), HttpStatus.CREATED);
 
     }
 
-    @PostMapping("/order")
-    public ResponseEntity<?> orderMagic(@RequestBody OrderRequest orderRequest) {
-        return null;
+    @PostMapping("/order/create")
+    public ResponseEntity<MagicOrderResponse> createMagicOrder(@Valid @RequestBody MagicOrderRequest magicOrderRequest) {
+        return new ResponseEntity<>(mageService.createMagicOrder(magicOrderRequest), HttpStatus.CREATED);
     }
 }

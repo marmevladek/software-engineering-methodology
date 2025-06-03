@@ -4,8 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.itmo.sem.backend.model.MagicOrder;
-import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
+import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.service.StorerService;
 
 import java.util.List;
@@ -19,12 +18,12 @@ public class StorerController {
     private final StorerService storerService;
 
     @GetMapping("/orders")
-    public ResponseEntity<List<MagicOrderResponse>> findAllMagicOrders() {
+    public ResponseEntity<List<OrderResponse>> findAllMagicOrders() {
         return new ResponseEntity<>(storerService.findAll(), HttpStatus.OK);
     }
 
     @GetMapping("/orders/{id}")
-    public ResponseEntity<MagicOrderResponse> findMagicOrderById(@PathVariable("id") UUID id) {
+    public ResponseEntity<OrderResponse> findMagicOrderById(@PathVariable("id") UUID id) {
         return new ResponseEntity<>(storerService.findById(id), HttpStatus.OK);
     }
 

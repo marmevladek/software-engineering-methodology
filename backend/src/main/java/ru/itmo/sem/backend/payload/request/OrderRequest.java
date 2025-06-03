@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MagicOrderRequest {
+public class OrderRequest {
     @NotBlank(message = "Title is required")
     private String title;
 }

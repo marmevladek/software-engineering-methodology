@@ -13,7 +13,7 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MagicOrderResponse {
+public class OrderResponse {
     private UUID id;
     private LocalDateTime createdAt;
     private OrderStatus status;

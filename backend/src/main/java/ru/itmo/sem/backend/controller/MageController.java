@@ -8,9 +8,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
+import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
-import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
+import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.payload.response.UserResponse;
 import ru.itmo.sem.backend.service.MageService;
 
@@ -28,7 +28,7 @@ public class MageController {
     }
 
     @PostMapping("/order/create")
-    public ResponseEntity<MagicOrderResponse> createMagicOrder(@Valid @RequestBody MagicOrderRequest magicOrderRequest) {
-        return new ResponseEntity<>(mageService.createMagicOrder(magicOrderRequest), HttpStatus.CREATED);
+    public ResponseEntity<OrderResponse> createMagicOrder(@Valid @RequestBody OrderRequest orderRequest) {
+        return new ResponseEntity<>(mageService.createMagicOrder(orderRequest), HttpStatus.CREATED);
     }
 }

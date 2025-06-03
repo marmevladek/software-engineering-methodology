@@ -2,10 +2,10 @@ package ru.itmo.sem.backend.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.itmo.sem.backend.exception.MagicOrderNotFoundException;
-import ru.itmo.sem.backend.mapper.MagicOrderMapper;
+import ru.itmo.sem.backend.mapper.GenericOrderMapper;
 import ru.itmo.sem.backend.model.MagicOrder;
 import ru.itmo.sem.backend.model.enums.OrderStatus;
-import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
+import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.repository.MagicOrderRepository;
 import ru.itmo.sem.backend.service.StorerService;
 
@@ -22,18 +22,18 @@ public class StorerServiceImpl implements StorerService {
     }
 
     @Override
-    public List<MagicOrderResponse> findAll() {
+    public List<OrderResponse> findAll() {
         return magicOrderRepository.findAll()
                 .stream()
-                .map(MagicOrderMapper::toResponse)
+                .map(GenericOrderMapper::toResponse)
                 .toList();
     }
 
     @Override
-    public MagicOrderResponse findById(UUID id) {
+    public OrderResponse findById(UUID id) {
         MagicOrder order = magicOrderRepository.findById(id)
                 .orElseThrow(() -> new MagicOrderNotFoundException(id));
-        return MagicOrderMapper.toResponse(order);
+        return GenericOrderMapper.toResponse(order);
     }
 
     @Override

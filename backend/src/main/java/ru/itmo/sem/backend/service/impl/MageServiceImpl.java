@@ -2,14 +2,14 @@ package ru.itmo.sem.backend.service.impl;
 
 import org.springframework.stereotype.Service;
 import ru.itmo.sem.backend.exception.RoleNotFoundException;
-import ru.itmo.sem.backend.mapper.MagicOrderMapper;
+import ru.itmo.sem.backend.mapper.GenericOrderMapper;
 import ru.itmo.sem.backend.mapper.UserMapper;
 import ru.itmo.sem.backend.model.MagicOrder;
 import ru.itmo.sem.backend.model.Role;
 import ru.itmo.sem.backend.model.User;
-import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
+import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
-import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
+import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.payload.response.UserResponse;
 import ru.itmo.sem.backend.repository.MagicOrderRepository;
 import ru.itmo.sem.backend.repository.RoleRepository;
@@ -41,10 +41,10 @@ public class MageServiceImpl implements MageService {
     }
 
     @Override
-    public MagicOrderResponse createMagicOrder(MagicOrderRequest magicOrderRequest) {
-        MagicOrder order = MagicOrderMapper.toEntity(magicOrderRequest);
+    public OrderResponse createMagicOrder(OrderRequest orderRequest) {
+        MagicOrder order = GenericOrderMapper.toEntity(orderRequest, MagicOrder::new);
         MagicOrder savedOrder = magicOrderRepository.save(order);
 
-        return MagicOrderMapper.toResponse(savedOrder);
+        return GenericOrderMapper.toResponse(savedOrder);
     }
 }

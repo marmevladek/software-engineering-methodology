@@ -14,7 +14,7 @@ import ru.itmo.sem.backend.payload.response.UserResponse;
 import ru.itmo.sem.backend.repository.MagicOrderRepository;
 import ru.itmo.sem.backend.repository.RoleRepository;
 import ru.itmo.sem.backend.repository.UserRepository;
-import ru.itmo.sem.backend.service.MageService;
+import ru.itmo.sem.backend.service.api.MageService;
 
 @Service
 public class MageServiceImpl implements MageService {

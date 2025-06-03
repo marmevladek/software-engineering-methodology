@@ -1,4 +1,4 @@
-package ru.itmo.sem.backend.service;
+package ru.itmo.sem.backend.service.api;
 
 import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;

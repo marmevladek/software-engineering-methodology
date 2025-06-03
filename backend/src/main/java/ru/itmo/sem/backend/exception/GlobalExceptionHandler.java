@@ -21,7 +21,16 @@ public class GlobalExceptionHandler extends RuntimeException {
   @ExceptionHandler(MagicOrderNotFoundException.class)
   public ResponseEntity<ErrorResponse> handleMagicOrderNotFound(MagicOrderNotFoundException ex) {
     ErrorResponse error = new ErrorResponse(
-            "MAGICORDER_NOT_FOUND",
+            "MAGIC_ORDER_NOT_FOUND",
+            ex.getMessage()
+    );
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+  }
+
+  @ExceptionHandler(CreatureOrderNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleCreatureOrderNotFound(CreatureOrderNotFoundException ex) {
+    ErrorResponse error = new ErrorResponse(
+            "CREATURE_ORDER_NOT_FOUND",
             ex.getMessage()
     );
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);

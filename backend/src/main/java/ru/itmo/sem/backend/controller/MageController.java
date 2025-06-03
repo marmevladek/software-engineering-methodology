@@ -12,7 +12,7 @@ import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
 import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.payload.response.UserResponse;
-import ru.itmo.sem.backend.service.MageService;
+import ru.itmo.sem.backend.service.api.MageService;
 
 @RestController
 @RequiredArgsConstructor

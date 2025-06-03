@@ -35,4 +35,13 @@ public class GlobalExceptionHandler extends RuntimeException {
     );
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
   }
+
+  @ExceptionHandler(ExhaustionOrderNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleExhaustionOrderNotFound(ExhaustionOrderNotFoundException ex) {
+    ErrorResponse error = new ErrorResponse(
+            "EXHAUSTION_ORDER_NOT_FOUND",
+            ex.getMessage()
+    );
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+  }
 }

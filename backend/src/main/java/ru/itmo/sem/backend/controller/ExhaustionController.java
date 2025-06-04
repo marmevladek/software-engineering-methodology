@@ -8,7 +8,7 @@ import ru.itmo.sem.backend.dto.MagicDTO;
 import ru.itmo.sem.backend.model.order.ExhaustionOrder;
 import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
 import ru.itmo.sem.backend.service.api.ExhaustionService;
-import ru.itmo.sem.backend.service.api.OrderService;
+import ru.itmo.sem.backend.service.api.base.BaseOrderService;
 
 
 @RestController
@@ -18,12 +18,12 @@ public class ExhaustionController extends AbstractOrderController<ExhaustionOrde
 
     private final ExhaustionService exhaustionService;
 
-    protected ExhaustionController(OrderService<ExhaustionOrder, ExhaustionOrderResponse> orderService, ExhaustionService exhaustionService) {
+    protected ExhaustionController(BaseOrderService<ExhaustionOrder, ExhaustionOrderResponse> orderService, ExhaustionService exhaustionService) {
         super(orderService);
         this.exhaustionService = exhaustionService;
     }
 
-    @PostMapping("/magic/add")
+    @PutMapping("/magic/add")
     public ResponseEntity<MagicDTO> addMagic(@RequestBody MagicDTO magicDTO, @RequestParam String orderId) {
         return new ResponseEntity<>(exhaustionService.addMagic(magicDTO, orderId), HttpStatus.CREATED);
     }

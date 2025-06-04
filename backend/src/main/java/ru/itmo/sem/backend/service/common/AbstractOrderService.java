@@ -1,17 +1,16 @@
 package ru.itmo.sem.backend.service.common;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.itmo.sem.backend.mapper.GenericOrderMapper;
 import ru.itmo.sem.backend.model.order.BaseOrder;
 import ru.itmo.sem.backend.model.enums.OrderStatus;
-import ru.itmo.sem.backend.payload.response.OrderResponse;
-import ru.itmo.sem.backend.service.api.OrderService;
+import ru.itmo.sem.backend.payload.response.base.BaseOrderResponse;
+import ru.itmo.sem.backend.service.api.base.BaseOrderService;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.function.Function;
 
-public abstract class AbstractOrderService<T extends BaseOrder, R extends OrderResponse> implements OrderService<T, R> {
+public abstract class AbstractOrderService<T extends BaseOrder, R extends BaseOrderResponse> implements BaseOrderService<T, R> {
 
     protected final JpaRepository<T, UUID> repository;
     protected final Function<T, R> toResponse;

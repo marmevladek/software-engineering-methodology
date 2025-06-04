@@ -7,13 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import ru.itmo.sem.backend.controller.base.AbstractOrderController;
 import ru.itmo.sem.backend.model.order.MagicOrder;
 import ru.itmo.sem.backend.payload.request.CreatureOrderRequest;
-import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.response.AvailabilityResponse;
 import ru.itmo.sem.backend.payload.response.CreatureOrderResponse;
 import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
-import ru.itmo.sem.backend.payload.response.OrderResponse;
-import ru.itmo.sem.backend.service.api.OrderService;
+import ru.itmo.sem.backend.service.api.base.BaseOrderService;
 import ru.itmo.sem.backend.service.api.StorerService;
+
+import java.util.List;
 
 
 @RestController
@@ -23,7 +23,7 @@ public class StorerController extends AbstractOrderController<MagicOrder, MagicO
 
     private final StorerService storerService;
 
-    protected StorerController(OrderService<MagicOrder, MagicOrderResponse> orderService, StorerService storerService) {
+    protected StorerController(BaseOrderService<MagicOrder, MagicOrderResponse> orderService, StorerService storerService) {
         super(orderService);
         this.storerService = storerService;
     }
@@ -39,5 +39,10 @@ public class StorerController extends AbstractOrderController<MagicOrder, MagicO
             @RequestParam int requestedVolume
     ) {
         return new ResponseEntity<>(storerService.checkAvailability(id, requestedVolume), HttpStatus.OK);
+    }
+
+    @GetMapping("/my-orders")
+    public ResponseEntity<List<CreatureOrderResponse>> findMyOrders() {
+        return new ResponseEntity<>(storerService.getMyOrders(), HttpStatus.OK);
     }
 }

@@ -1,4 +1,4 @@
-package ru.itmo.sem.backend.model;
+package ru.itmo.sem.backend.model.user;
 
 import jakarta.persistence.*;
 import lombok.Getter;

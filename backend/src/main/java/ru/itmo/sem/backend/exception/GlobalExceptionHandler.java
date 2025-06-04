@@ -44,4 +44,22 @@ public class GlobalExceptionHandler extends RuntimeException {
     );
     return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
   }
+
+  @ExceptionHandler(MagicNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleMagicNotFound(MagicNotFoundException ex) {
+    ErrorResponse error = new ErrorResponse(
+            "MAGIC_NOT_FOUND",
+            ex.getMessage()
+    );
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+  }
+
+  @ExceptionHandler(CreatureNotFoundException.class)
+  public ResponseEntity<ErrorResponse> handleCreatureNotFound(CreatureNotFoundException ex) {
+    ErrorResponse error = new ErrorResponse(
+            "CREATURE_NOT_FOUND",
+            ex.getMessage()
+    );
+    return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+  }
 }

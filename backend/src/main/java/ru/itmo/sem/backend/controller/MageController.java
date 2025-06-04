@@ -4,15 +4,16 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
 import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
+import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
 import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.payload.response.UserResponse;
 import ru.itmo.sem.backend.service.api.MageService;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -28,7 +29,14 @@ public class MageController {
     }
 
     @PostMapping("/order/create")
-    public ResponseEntity<OrderResponse> createMagicOrder(@Valid @RequestBody OrderRequest orderRequest) {
+    public ResponseEntity<MagicOrderResponse> createMagicOrder(@Valid @RequestBody MagicOrderRequest orderRequest) {
         return new ResponseEntity<>(mageService.createMagicOrder(orderRequest), HttpStatus.CREATED);
     }
+
+    @GetMapping("/orders")
+    public ResponseEntity<List<MagicOrderResponse>> findAllOrders() {
+        return new ResponseEntity<>(mageService.findAllOrders(), HttpStatus.OK);
+    }
+
+
 }

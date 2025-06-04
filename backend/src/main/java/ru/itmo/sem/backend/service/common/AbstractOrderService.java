@@ -41,11 +41,9 @@ public abstract class AbstractOrderService<T extends BaseOrder, R extends OrderR
         T order = repository.findById(id)
                 .orElseThrow(() -> createNotFoundException(id));
 
-        if (!order.getStatus().equals(OrderStatus.DONE)) {
+        if (order.getStatus().equals(OrderStatus.IN_PROGRESS)) {
             order.setStatus(OrderStatus.DONE);
             repository.save(order);
-        } else {
-            repository.delete(order);
         }
     }
 

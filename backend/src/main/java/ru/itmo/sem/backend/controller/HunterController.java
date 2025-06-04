@@ -7,15 +7,12 @@ import org.springframework.web.bind.annotation.*;
 import ru.itmo.sem.backend.controller.base.AbstractOrderController;
 import ru.itmo.sem.backend.dto.CreatureDTO;
 import ru.itmo.sem.backend.model.order.CreatureOrder;
-import ru.itmo.sem.backend.payload.request.CreatureOrderRequest;
 import ru.itmo.sem.backend.payload.request.ExhaustionOrderRequest;
-import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.response.AvailabilityResponse;
 import ru.itmo.sem.backend.payload.response.CreatureOrderResponse;
 import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
-import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.service.api.HunterService;
-import ru.itmo.sem.backend.service.api.OrderService;
+import ru.itmo.sem.backend.service.api.base.BaseOrderService;
 
 import java.util.List;
 
@@ -27,7 +24,7 @@ public class HunterController extends AbstractOrderController<CreatureOrder, Cre
 
     private final HunterService hunterService;
 
-    protected HunterController(OrderService<CreatureOrder, CreatureOrderResponse> orderService, HunterService hunterService) {
+    protected HunterController(BaseOrderService<CreatureOrder, CreatureOrderResponse> orderService, HunterService hunterService) {
         super(orderService);
         this.hunterService = hunterService;
     }

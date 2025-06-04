@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.itmo.sem.backend.payload.response.base.BaseOrderResponse;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class MagicOrderResponse extends OrderResponse {
+public class MagicOrderResponse extends BaseOrderResponse {
     private Long magicId;
 }

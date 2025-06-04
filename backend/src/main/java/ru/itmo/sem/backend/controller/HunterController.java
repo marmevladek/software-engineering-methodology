@@ -17,6 +17,8 @@ import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.service.api.HunterService;
 import ru.itmo.sem.backend.service.api.OrderService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/hunter")
@@ -46,5 +48,10 @@ public class HunterController extends AbstractOrderController<CreatureOrder, Cre
             @RequestParam int requestedQuantity
     ) {
         return new ResponseEntity<>(hunterService.checkAvailability(id, requestedQuantity), HttpStatus.OK);
+    }
+
+    @GetMapping("/my-orders")
+    public ResponseEntity<List<ExhaustionOrderResponse>> findMyOrders() {
+        return new ResponseEntity<>(hunterService.getMyOrders(), HttpStatus.OK);
     }
 }

@@ -15,6 +15,8 @@ import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.service.api.OrderService;
 import ru.itmo.sem.backend.service.api.StorerService;
 
+import java.util.List;
+
 
 @RestController
 @RequestMapping("/api/storer")
@@ -39,5 +41,10 @@ public class StorerController extends AbstractOrderController<MagicOrder, MagicO
             @RequestParam int requestedVolume
     ) {
         return new ResponseEntity<>(storerService.checkAvailability(id, requestedVolume), HttpStatus.OK);
+    }
+
+    @GetMapping("/my-orders")
+    public ResponseEntity<List<CreatureOrderResponse>> findMyOrders() {
+        return new ResponseEntity<>(storerService.getMyOrders(), HttpStatus.OK);
     }
 }

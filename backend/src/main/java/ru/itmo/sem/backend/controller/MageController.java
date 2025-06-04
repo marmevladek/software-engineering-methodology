@@ -6,10 +6,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
-import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.request.UserRequest;
 import ru.itmo.sem.backend.payload.response.MagicOrderResponse;
-import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.payload.response.UserResponse;
 import ru.itmo.sem.backend.service.api.MageService;
 
@@ -34,9 +32,9 @@ public class MageController {
         return new ResponseEntity<>(mageService.createMagicOrder(orderRequest), HttpStatus.CREATED);
     }
 
-    @GetMapping("/orders")
-    public ResponseEntity<List<MagicOrderResponse>> findAllOrders() {
-        return new ResponseEntity<>(mageService.findAllOrders(), HttpStatus.OK);
+    @GetMapping("/my-orders")
+    public ResponseEntity<List<MagicOrderResponse>> findMyOrders() {
+        return new ResponseEntity<>(mageService.getMyOrders(), HttpStatus.OK);
     }
 
 

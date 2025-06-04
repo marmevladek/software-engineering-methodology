@@ -1,7 +1,6 @@
 package ru.itmo.sem.backend.service.common;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.itmo.sem.backend.mapper.GenericOrderMapper;
 import ru.itmo.sem.backend.model.order.BaseOrder;
 import ru.itmo.sem.backend.model.enums.OrderStatus;
 import ru.itmo.sem.backend.payload.response.OrderResponse;

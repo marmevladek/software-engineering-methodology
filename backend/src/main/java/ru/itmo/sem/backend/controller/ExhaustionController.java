@@ -13,6 +13,7 @@ import ru.itmo.sem.backend.service.api.OrderService;
 
 @RestController
 @RequestMapping("/api/exhaustion")
+@CrossOrigin("http://localhost:5173")
 public class ExhaustionController extends AbstractOrderController<ExhaustionOrder, ExhaustionOrderResponse> {
 
     private final ExhaustionService exhaustionService;
@@ -23,7 +24,7 @@ public class ExhaustionController extends AbstractOrderController<ExhaustionOrde
     }
 
     @PostMapping("/magic/add")
-    public ResponseEntity<MagicDTO> addMagic(@RequestBody MagicDTO magicDTO) {
-        return new ResponseEntity<>(exhaustionService.addMagic(magicDTO), HttpStatus.CREATED);
+    public ResponseEntity<MagicDTO> addMagic(@RequestBody MagicDTO magicDTO, @RequestParam String orderId) {
+        return new ResponseEntity<>(exhaustionService.addMagic(magicDTO, orderId), HttpStatus.CREATED);
     }
 }

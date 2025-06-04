@@ -18,6 +18,7 @@ import ru.itmo.sem.backend.service.api.StorerService;
 
 @RestController
 @RequestMapping("/api/storer")
+@CrossOrigin("http://localhost:5173")
 public class StorerController extends AbstractOrderController<MagicOrder, MagicOrderResponse> {
 
     private final StorerService storerService;

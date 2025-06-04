@@ -19,14 +19,16 @@ public class MagicInitializer implements ApplicationRunner {
     public void run(ApplicationArguments args) {
         int volume = 10;
         for (int i = 1; i <= 5; i++) {
-            magicRepository.save(
-                    new Magic(
-                            (long) i,
-                            volume
-                    )
-            );
+            if (!magicRepository.existsById((long)i)) {
+                magicRepository.save(
+                        new Magic(
+                                (long) i,
+                                volume
+                        )
+                );
 
-            volume += 4;
+                volume += 4;
+            }
         }
     }
 

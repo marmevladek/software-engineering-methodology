@@ -18,6 +18,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/mage")
+@CrossOrigin("http://localhost:5173")
 public class MageController {
 
     private final MageService mageService;

@@ -6,5 +6,5 @@ import ru.itmo.sem.backend.model.order.ExhaustionOrder;
 import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
 
 public interface ExhaustionService extends OrderService<ExhaustionOrder, ExhaustionOrderResponse> {
-    MagicDTO addMagic(MagicDTO magicDTO);
+    MagicDTO addMagic(MagicDTO magicDTO, String orderId);
 }

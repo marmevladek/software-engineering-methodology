@@ -20,6 +20,7 @@ import ru.itmo.sem.backend.service.api.OrderService;
 
 @RestController
 @RequestMapping("/api/hunter")
+@CrossOrigin("http://localhost:5173")
 public class HunterController extends AbstractOrderController<CreatureOrder, CreatureOrderResponse> {
 
     private final HunterService hunterService;

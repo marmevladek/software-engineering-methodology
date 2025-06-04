@@ -1,16 +1,29 @@
 package ru.itmo.sem.backend.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.itmo.sem.backend.controller.base.AbstractOrderController;
-import ru.itmo.sem.backend.model.ExhaustionOrder;
+import ru.itmo.sem.backend.dto.MagicDTO;
+import ru.itmo.sem.backend.model.order.ExhaustionOrder;
+import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
+import ru.itmo.sem.backend.service.api.ExhaustionService;
 import ru.itmo.sem.backend.service.api.OrderService;
 
 
 @RestController
 @RequestMapping("/api/exhaustion")
-public class ExhaustionController extends AbstractOrderController<ExhaustionOrder> {
+public class ExhaustionController extends AbstractOrderController<ExhaustionOrder, ExhaustionOrderResponse> {
 
-    protected ExhaustionController(OrderService<ExhaustionOrder> orderService) {
+    private final ExhaustionService exhaustionService;
+
+    protected ExhaustionController(OrderService<ExhaustionOrder, ExhaustionOrderResponse> orderService, ExhaustionService exhaustionService) {
         super(orderService);
+        this.exhaustionService = exhaustionService;
+    }
+
+    @PostMapping("/magic/add")
+    public ResponseEntity<MagicDTO> addMagic(@RequestBody MagicDTO magicDTO) {
+        return new ResponseEntity<>(exhaustionService.addMagic(magicDTO), HttpStatus.CREATED);
     }
 }

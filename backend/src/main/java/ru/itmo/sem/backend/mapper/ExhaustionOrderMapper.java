@@ -1,9 +1,7 @@
 package ru.itmo.sem.backend.mapper;
 
 import ru.itmo.sem.backend.model.order.ExhaustionOrder;
-import ru.itmo.sem.backend.model.order.MagicOrder;
 import ru.itmo.sem.backend.payload.request.ExhaustionOrderRequest;
-import ru.itmo.sem.backend.payload.request.MagicOrderRequest;
 import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
 
 public class ExhaustionOrderMapper {

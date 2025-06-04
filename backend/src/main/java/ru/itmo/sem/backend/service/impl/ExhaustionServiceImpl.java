@@ -7,6 +7,7 @@ import ru.itmo.sem.backend.exception.MagicNotFoundException;
 import ru.itmo.sem.backend.mapper.ExhaustionOrderMapper;
 import ru.itmo.sem.backend.mapper.MagicMapper;
 import ru.itmo.sem.backend.model.entity.Magic;
+import ru.itmo.sem.backend.model.enums.OrderStatus;
 import ru.itmo.sem.backend.model.order.ExhaustionOrder;
 import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
 import ru.itmo.sem.backend.repository.ExhaustionOrderRepository;
@@ -20,10 +21,12 @@ import java.util.UUID;
 public class ExhaustionServiceImpl extends AbstractOrderService<ExhaustionOrder, ExhaustionOrderResponse> implements ExhaustionService {
 
     private final MagicRepository magicRepository;
+    private final ExhaustionOrderRepository exhaustionOrderRepository;
 
-    protected ExhaustionServiceImpl(ExhaustionOrderRepository repository, MagicRepository magicRepository) {
+    protected ExhaustionServiceImpl(ExhaustionOrderRepository repository, MagicRepository magicRepository, ExhaustionOrderRepository exhaustionOrderRepository) {
         super(repository, ExhaustionOrderMapper::toResponse);
         this.magicRepository = magicRepository;
+        this.exhaustionOrderRepository = exhaustionOrderRepository;
     }
 
     @Override
@@ -32,13 +35,17 @@ public class ExhaustionServiceImpl extends AbstractOrderService<ExhaustionOrder,
     }
 
     @Override
-    public MagicDTO addMagic(MagicDTO magicDTO) {
+    public MagicDTO addMagic(MagicDTO magicDTO, String orderId) {
         Magic magic = magicRepository.findById(magicDTO.getId())
                 .orElseThrow(() -> new MagicNotFoundException(magicDTO.getId()));
 
-        magic.setVolume(magicDTO.getVolume());
+        magic.setVolume(magic.getVolume() + magicDTO.getVolume());
 
         Magic saved = magicRepository.save(magic);
+
+        ExhaustionOrder order = exhaustionOrderRepository.findById(UUID.fromString(orderId)).orElseThrow(()->new ExhaustionOrderNotFoundException(UUID.fromString(orderId)));
+        order.setStatus(OrderStatus.DONE);
+        exhaustionOrderRepository.save(order);
 
         return MagicMapper.toDTO(saved);
     }

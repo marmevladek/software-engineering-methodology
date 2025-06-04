@@ -4,11 +4,12 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.itmo.sem.backend.payload.request.base.BaseOrderRequest;
 
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class CreatureOrderRequest extends OrderRequest {
+public class CreatureOrderRequest extends BaseOrderRequest {
     private String name;
 }

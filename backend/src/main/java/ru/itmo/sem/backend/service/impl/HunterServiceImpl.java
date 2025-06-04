@@ -7,23 +7,22 @@ import ru.itmo.sem.backend.exception.CreatureOrderNotFoundException;
 import ru.itmo.sem.backend.mapper.CreatureMapper;
 import ru.itmo.sem.backend.mapper.CreatureOrderMapper;
 import ru.itmo.sem.backend.mapper.ExhaustionOrderMapper;
-import ru.itmo.sem.backend.mapper.GenericOrderMapper;
 import ru.itmo.sem.backend.model.entity.Creature;
 import ru.itmo.sem.backend.model.order.CreatureOrder;
 import ru.itmo.sem.backend.model.order.ExhaustionOrder;
 import ru.itmo.sem.backend.payload.request.ExhaustionOrderRequest;
-import ru.itmo.sem.backend.payload.request.OrderRequest;
 import ru.itmo.sem.backend.payload.response.AvailabilityResponse;
 import ru.itmo.sem.backend.payload.response.CreatureOrderResponse;
 import ru.itmo.sem.backend.payload.response.ExhaustionOrderResponse;
-import ru.itmo.sem.backend.payload.response.OrderResponse;
 import ru.itmo.sem.backend.repository.CreatureOrderRepository;
 import ru.itmo.sem.backend.repository.CreatureRepository;
 import ru.itmo.sem.backend.repository.ExhaustionOrderRepository;
 import ru.itmo.sem.backend.service.api.HunterService;
 import ru.itmo.sem.backend.service.common.AbstractOrderService;
 
+import java.util.List;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class HunterServiceImpl extends AbstractOrderService<CreatureOrder, CreatureOrderResponse> implements HunterService {
@@ -65,5 +64,13 @@ public class HunterServiceImpl extends AbstractOrderService<CreatureOrder, Creat
                 .orElseThrow(() -> new CreatureNotFoundException(id));
 
         return new AvailabilityResponse(creature.getQuantity() >= requestedQuantity);
+    }
+
+    @Override
+    public List<ExhaustionOrderResponse> getMyOrders() {
+        return exhaustionOrderRepository.findAll()
+                .stream()
+                .map(ExhaustionOrderMapper::toResponse)
+                .collect(Collectors.toList());
     }
 }

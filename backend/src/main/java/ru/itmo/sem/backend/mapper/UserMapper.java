@@ -1,7 +1,7 @@
 package ru.itmo.sem.backend.mapper;
 
-import ru.itmo.sem.backend.model.Role;
-import ru.itmo.sem.backend.model.User;
+import ru.itmo.sem.backend.model.user.Role;
+import ru.itmo.sem.backend.model.user.User;
 import ru.itmo.sem.backend.payload.request.UserRequest;
 import ru.itmo.sem.backend.payload.response.UserResponse;
 

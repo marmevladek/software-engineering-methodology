@@ -1,15 +1,19 @@
-package ru.itmo.sem.backend.model;
+package ru.itmo.sem.backend.model.order;
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.itmo.sem.backend.model.enums.OrderStatus;
 
 import java.time.LocalDateTime;
-import java.util.UUID;
 
 @Entity
 @Table(name = "magic_orders")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class MagicOrder extends BaseOrder {
+    private Long magicId;
 }

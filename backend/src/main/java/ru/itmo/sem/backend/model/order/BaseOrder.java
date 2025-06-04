@@ -1,4 +1,4 @@
-package ru.itmo.sem.backend.model;
+package ru.itmo.sem.backend.model.order;
 
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,9 +29,17 @@ public abstract class BaseOrder {
     @Column(name = "title")
     private String title;
 
-    public BaseOrder(LocalDateTime createdAt, OrderStatus status, String title) {
+    @Column(name = "deadline")
+    private String deadline; // localdatetime
+
+    @Column(name = "quantity")
+    private int quantity;
+
+    public BaseOrder(LocalDateTime createdAt, OrderStatus status, String title, String deadline, int quantity) {
         this.createdAt = createdAt;
         this.status = status;
         this.title = title;
+        this.deadline = deadline;
+        this.quantity = quantity;
     }
 }

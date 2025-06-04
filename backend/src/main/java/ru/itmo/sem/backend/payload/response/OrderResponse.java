@@ -1,5 +1,6 @@
 package ru.itmo.sem.backend.payload.response;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -13,9 +14,11 @@ import java.util.UUID;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderResponse {
+public abstract class OrderResponse {
     private UUID id;
     private LocalDateTime createdAt;
     private OrderStatus status;
     private String title;
+    private String deadline; // localdatetime
+    private int quantity;
 }

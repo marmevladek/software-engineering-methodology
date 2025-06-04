@@ -1,5 +1,6 @@
 package ru.itmo.sem.backend.payload.request;
 
+import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -10,7 +11,12 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderRequest {
+public abstract class OrderRequest {
+
     @NotBlank(message = "Title is required")
     private String title;
+
+    private String deadline; // localdatetime
+
+    private int quantity;
 }

@@ -3,6 +3,7 @@ package ru.itmo.sem.backend.service.impl;
 import org.springframework.stereotype.Service;
 import ru.itmo.sem.backend.dto.MagicDTO;
 import ru.itmo.sem.backend.exception.ExhaustionOrderNotFoundException;
+import ru.itmo.sem.backend.exception.MagicNotFoundException;
 import ru.itmo.sem.backend.mapper.ExhaustionOrderMapper;
 import ru.itmo.sem.backend.mapper.MagicMapper;
 import ru.itmo.sem.backend.model.entity.Magic;
@@ -32,7 +33,11 @@ public class ExhaustionServiceImpl extends AbstractOrderService<ExhaustionOrder,
 
     @Override
     public MagicDTO addMagic(MagicDTO magicDTO) {
-        Magic magic = MagicMapper.toEntity(magicDTO);
+        Magic magic = magicRepository.findById(magicDTO.getId())
+                .orElseThrow(() -> new MagicNotFoundException(magicDTO.getId()));
+
+        magic.setVolume(magicDTO.getVolume());
+
         Magic saved = magicRepository.save(magic);
 
         return MagicMapper.toDTO(saved);

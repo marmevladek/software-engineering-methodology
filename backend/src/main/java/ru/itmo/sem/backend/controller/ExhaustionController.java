@@ -23,7 +23,7 @@ public class ExhaustionController extends AbstractOrderController<ExhaustionOrde
         this.exhaustionService = exhaustionService;
     }
 
-    @PostMapping("/magic/add")
+    @PutMapping("/magic/add")
     public ResponseEntity<MagicDTO> addMagic(@RequestBody MagicDTO magicDTO, @RequestParam String orderId) {
         return new ResponseEntity<>(exhaustionService.addMagic(magicDTO, orderId), HttpStatus.CREATED);
     }
